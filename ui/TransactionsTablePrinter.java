@@ -8,10 +8,10 @@ import domain.TransactionsData;
 public class TransactionsTablePrinter {
     public static void printTransactionsTable(List<TransactionsData> transactions){
         final int[] WIDTHS = {20, 8, 32, 6, 17, 17};
-        final String[] REGURATION_HEADER = {"Traded_DateTime", "Ticker", "Product_Name" ,"Side", "Unit_Price", "Input_DateTime"};
+        final String[] REGULATION_HEADER = {"Traded_DateTime", "Ticker", "Product_Name" ,"Side", "Unit_Price", "Input_DateTime"};
 
         TransactionsTablePrinter printer = new TransactionsTablePrinter();
-        printer.print(transactions, WIDTHS, REGURATION_HEADER);
+        printer.print(transactions, WIDTHS, REGULATION_HEADER);
     }
 
     public void print(List<TransactionsData> transactions, int[] widths, String[] header){
