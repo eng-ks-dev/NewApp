@@ -18,11 +18,11 @@ public class TransactionsTablePrinter {
         printTopBottomBorder(widths);
         printHeader(widths, header);
         printMiddleBorder(widths);
-        printData(transactions, widths, header);
+        printData(transactions, widths);
         printTopBottomBorder(widths);
     }
 
-    private void printData(List<TransactionsData> transactions, int[] widths, String[] header){
+    private void printData(List<TransactionsData> transactions, int[] widths){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         
         for(TransactionsData transaction : transactions){
