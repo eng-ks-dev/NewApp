@@ -1,4 +1,4 @@
-package repository;
+package dataaccess;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import domain.Side;
-import domain.StocksData;
-import domain.TransactionsData;
+import business.Side;
+import business.StocksData;
+import business.TransactionsData;
 
 public class TransactionsCsvReader {
     private final String[] REGULATION_HEADER = {"traded_datetime", "ticker", "side", "quantity", "unit_price", "input_datetime"};

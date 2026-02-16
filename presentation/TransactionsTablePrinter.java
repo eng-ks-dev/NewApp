@@ -1,37 +1,45 @@
-package ui;
+package presentation;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import domain.StocksData;
+import business.TransactionsData;
 
-public class StocksTablePrinter {
-    public static void printStocksTable(List<StocksData> stocks){
-        final int[] WIDTHS = {8, 32, 10, 17};
-        final String[] HEADER = {"Ticker", "Product_Name", "Market", "Shared_Issued"};
+public class TransactionsTablePrinter {
+    public static void printTransactionsTable(List<TransactionsData> transactions){
+        final int[] WIDTHS = {20, 8, 32, 6, 17, 17};
+        final String[] REGULATION_HEADER = {"Traded_DateTime", "Ticker", "Product_Name" ,"Side", "Unit_Price", "Input_DateTime"};
 
-        StocksTablePrinter printer = new StocksTablePrinter();
-        printer.print(stocks, WIDTHS, HEADER);
+        TransactionsTablePrinter printer = new TransactionsTablePrinter();
+        printer.print(transactions, WIDTHS, REGULATION_HEADER);
     }
 
-    public void print(List<StocksData> stocks, int[] widths, String[] header){
+    public void print(List<TransactionsData> transactions, int[] widths, String[] header){
         printTopBottomBorder(widths);
         printHeader(widths, header);
         printMiddleBorder(widths);
-        printData(stocks, widths);
+        printData(transactions, widths);
         printTopBottomBorder(widths);
     }
 
-    private void printData(List<StocksData> stocks, int[] widths){
-        for(StocksData stock : stocks){
+    private void printData(List<TransactionsData> transactions, int[] widths){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        for(TransactionsData transaction : transactions){
             System.out.print("|");
-            System.out.print(leftAlign(stock.getTicker(), widths[0]));
+            System.out.print(leftAlign(transaction.getTradedDateTime().format(formatter), widths[0]));
             System.out.print("|");
-            System.out.print(leftAlign(stock.getProductName(), widths[1]));
+            System.out.print(leftAlign(transaction.getTicker(), widths[1]));
             System.out.print("|");
-            System.out.print(leftAlign(stock.getMarket().getDisplayName(), widths[2]));
+            System.out.print(leftAlign(transaction.getProductName(),widths[2]));
             System.out.print("|");
-            String formattedShares = String.format("%,d", stock.getSharesissued());
-            System.out.print(rightAlign(formattedShares, widths[3]));
+            System.out.print(leftAlign(transaction.getSide().getDisplayName(), widths[3]));
+            System.out.print("|");
+            String quantity = String.format("%,d", transaction.getQuantity());
+            System.out.print(rightAlign(quantity, widths[4]));
+            System.out.print("|");
+            String tradedUnitPrice = String.format("%.2f", transaction.getTradedUnitPrice());
+            System.out.print(rightAlign(tradedUnitPrice, widths[5]));
             System.out.println("|");
         }
     }

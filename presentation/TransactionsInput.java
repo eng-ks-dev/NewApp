@@ -1,13 +1,13 @@
-package ui;
+package presentation;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
-import domain.Side;
-import domain.StocksData;
-import domain.TransactionsValidator;
+import business.Side;
+import business.StocksData;
+import business.TransactionsValidator;
 
 public class TransactionsInput {
     private final Scanner SCANNER;

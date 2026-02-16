@@ -1,4 +1,4 @@
-package repository;
+package dataaccess;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.format.DateTimeFormatter;
 
-import domain.TransactionsData;
+import business.TransactionsData;
 
 public class TransactionsCsvWritter {
     public void append(String filePath, TransactionsData transactions) throws IOException{

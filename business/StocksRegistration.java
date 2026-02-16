@@ -1,12 +1,12 @@
-package domain;
+package business;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import repository.StocksCsvReader;
-import repository.StocksCsvWritter;
-import ui.StocksInput;
+import dataaccess.StocksCsvReader;
+import dataaccess.StocksCsvWritter;
+import presentation.StocksInput;
 
 public class StocksRegistration {
     private final Scanner SCANNER;

@@ -1,4 +1,4 @@
-package domain;
+package business;
 
 public enum Side {
     BUY("B", "Buy"),

@@ -1,8 +1,8 @@
-package ui;
+package presentation;
 
 import java.util.Scanner;
 
-import domain.StocksValidator;
+import business.StocksValidator;
 
 public class StocksInput {
     private final Scanner SCANNER;

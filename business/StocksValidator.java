@@ -1,4 +1,4 @@
-package domain;
+package business;
 
 public class StocksValidator {
     public static boolean checkProductName(String productName){

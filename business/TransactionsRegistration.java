@@ -1,4 +1,4 @@
-package domain;
+package business;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
-import repository.StocksCsvReader;
-import repository.TransactionsCsvWritter;
-import ui.TransactionsInput;
+import dataaccess.StocksCsvReader;
+import dataaccess.TransactionsCsvWritter;
+import presentation.TransactionsInput;
 
 public class TransactionsRegistration {
     private final Scanner SCANNER;

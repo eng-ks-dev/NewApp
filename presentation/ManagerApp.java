@@ -1,13 +1,13 @@
-package ui;
+package presentation;
 import java.util.List;
 import java.util.Scanner;
 
-import domain.StocksData;
-import domain.StocksRegistration;
-import domain.TransactionsData;
-import domain.TransactionsRegistration;
-import repository.StocksCsvReader;
-import repository.TransactionsCsvReader;
+import business.StocksData;
+import business.StocksRegistration;
+import business.TransactionsData;
+import business.TransactionsRegistration;
+import dataaccess.StocksCsvReader;
+import dataaccess.TransactionsCsvReader;
 
 public class ManagerApp{
 

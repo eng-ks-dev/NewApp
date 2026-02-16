@@ -1,4 +1,4 @@
-package repository;
+package dataaccess;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import domain.Market;
-import domain.StocksData;
+import business.Market;
+import business.StocksData;
 
 public class StocksCsvReader {
     private static final String[] REGULATION_HEADER = {"ticker", "product_name", "market", "shares_issued"};
