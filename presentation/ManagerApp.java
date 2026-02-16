@@ -2,10 +2,7 @@ package presentation;
 import java.util.List;
 import java.util.Scanner;
 
-import business.StocksData;
-import business.StocksRegistration;
-import business.TransactionsData;
-import business.TransactionsRegistration;
+import business.*;
 import dataaccess.StocksCsvReader;
 import dataaccess.TransactionsCsvReader;
 
@@ -17,9 +14,9 @@ public class ManagerApp{
     public void run(){
         System.out.println("取引を開始します。");
         Scanner scanner = new Scanner(System.in);
-        boolean Flug = true;
+        boolean flag = true;
 
-        while(Flug){
+        while(flag){
             System.out.println("\nメニュー表示");
             System.out.println("A: 銘柄一覧");
             System.out.println("B: 新規登録");
@@ -61,10 +58,26 @@ public class ManagerApp{
                         }
                     }
                     break;
+
+                case "E":
+                    System.out.println("保有ポジション一覧を表示します。");
+                    List<TransactionsData> transactionsE = TransactionsCsvReader.showTransactionsList(STOCKS_FILE_PATH, TRANSACTIONS_FILE_PATH);
+                    if(transactionsE != null){
+                        if(transactionsE.isEmpty()){
+                            System.out.println("取引データが空のため、表示する保有ポジションがありません。");
+                        }else{
+                            PositionsCalculator calculator = new PositionsCalculator();
+                            List<PositionsData> positions = calculator.calculatePositions(transactionsE);
+
+                            PositionsTablePrinter.printPositionsTable(positions);
+                        }
+                    }
+
+                    break;
                     
                 case "Q":
                     System.out.println("メニューを終了します。");
-                    Flug = false;
+                    flag = false;
                     break;
                 
                 default:
