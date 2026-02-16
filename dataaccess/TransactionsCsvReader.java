@@ -64,15 +64,15 @@ public class TransactionsCsvReader {
         List<TransactionsData> transactionsList = new ArrayList<>();
         Path path = Paths.get(transactionsFilePath);
 
-        try(BufferedReader bufferdReader = Files.newBufferedReader(path)){
-            String[] header = bufferdReader.readLine().split(",");
+        try(BufferedReader bufferedReader = Files.newBufferedReader(path)){
+            String[] header = bufferedReader.readLine().split(",");
             if(!Arrays.equals(header, REGULATION_HEADER)){
                 throw new IOException("エラー：ヘッダーの列順が不正です。");
             }
 
             String line;
             int rowNum = 2;
-            while((line = bufferdReader.readLine()) != null){
+            while((line = bufferedReader.readLine()) != null){
                 String[] values = line.split(",");
                 if(values.length != REGULATION_HEADER.length){
                     throw new IOException("エラー：" + rowNum +"行目の列数が不正です。");
@@ -84,13 +84,13 @@ public class TransactionsCsvReader {
                     LocalDateTime tradedDateTime = LocalDateTime.parse(values[0], formatter);
                     String ticker = values[1];
                     Side side = Side.fromCode(values[2]);
-                    Long quantity = Long.parseLong(values[3]);
+                    long quantity = Long.parseLong(values[3]);
                     BigDecimal tradedUnitPrice = new BigDecimal(values[4]);
                     LocalDateTime inputDateTime = LocalDateTime.parse(values[5], formatter);
 
-                    TransactionsData transactiosData = new TransactionsData(tradedDateTime, ticker, side, quantity, tradedUnitPrice, inputDateTime);
+                    TransactionsData transactionsData = new TransactionsData(tradedDateTime, ticker, side, quantity, tradedUnitPrice, inputDateTime);
 
-                    transactionsList.add(transactiosData);
+                    transactionsList.add(transactionsData);
 
                 }catch(IllegalArgumentException | DateTimeParseException e){
                     throw new IOException("エラー：" + rowNum + "行目のデータ形式が不正です。", e);
