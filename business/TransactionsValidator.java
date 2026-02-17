@@ -83,7 +83,7 @@ public class TransactionsValidator {
 
     public static Long checkQuantity(String InputQuantity){
         try{
-            Long quantity = Long.parseLong(InputQuantity);
+            long quantity = Long.parseLong(InputQuantity);
             if(quantity < 1 || quantity > 999_999_999_999L){
                 System.out.println("エラー：株式数は1〜999,999,999,999の範囲で入力してください。");
                 return null;
