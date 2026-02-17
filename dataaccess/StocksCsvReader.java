@@ -57,7 +57,7 @@ public class StocksCsvReader {
                     StocksData stock = new StocksData();
 
                     stock.setTicker(values[0]);
-                    stock.setProducName(values[1]);
+                    stock.setProductName(values[1]);
                     stock.setMarket(Market.fromCode(values[2]));
                     stock.setSharesIssued(Long.parseLong(values[3]));
 

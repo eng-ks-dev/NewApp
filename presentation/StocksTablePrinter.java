@@ -30,7 +30,7 @@ public class StocksTablePrinter {
             System.out.print("|");
             System.out.print(leftAlign(stock.getMarket().getDisplayName(), widths[2]));
             System.out.print("|");
-            String formattedShares = String.format("%,d", stock.getSharesissued());
+            String formattedShares = String.format("%,d", stock.getSharesIssued());
             System.out.print(rightAlign(formattedShares, widths[3]));
             System.out.println("|");
         }

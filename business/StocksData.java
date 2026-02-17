@@ -16,7 +16,7 @@ public class StocksData {
     public Market getMarket(){
         return market;
     }
-    public long getSharesissued(){
+    public long getSharesIssued(){
         return sharesIssued;
     }
 
@@ -24,7 +24,7 @@ public class StocksData {
     public void setTicker(String ticker){
         this.ticker = ticker;
     }
-    public void setProducName(String productName){
+    public void setProductName(String productName){
         this.productName = productName;
     }
     public void setMarket(Market market){
