@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import dataaccess.StocksCsvReader;
-import dataaccess.StocksCsvWritter;
+import dataaccess.StocksCsvWriter;
 import presentation.StocksInput;
 
 public class StocksRegistration {
@@ -37,7 +37,7 @@ public class StocksRegistration {
 
             Market market = Market.fromDisplayName(marketStr);
 
-            StocksCsvWritter writter = new StocksCsvWritter();
+            StocksCsvWriter writter = new StocksCsvWriter();
             writter.append(FILE_PATH, ticker, productName, market.getCode(), sharesIssued);
             System.out.println("「" + productName + "」の新規登録を行いました。");
         }catch(IOException e){

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import business.TransactionsData;
 
-public class TransactionsCsvWritter {
+public class TransactionsCsvWriter {
     public void append(String filePath, TransactionsData transactions) throws IOException{
         Path path = Paths.get(filePath);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
