@@ -22,7 +22,7 @@ public class ManagerApp{
             System.out.println("B: 新規登録");
             System.out.println("C: 取引入力");
             System.out.println("D: 取引一覧");
-            System.out.println("D: ポジション一覧");
+            System.out.println("E: ポジション一覧");
             System.out.println("Q: 終了\n");
 
             String input = scanner.nextLine();

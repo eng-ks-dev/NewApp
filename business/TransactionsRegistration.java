@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import dataaccess.StocksCsvReader;
-import dataaccess.TransactionsCsvWritter;
+import dataaccess.TransactionsCsvReader;
+import dataaccess.TransactionsCsvWriter;
 import presentation.TransactionsInput;
 
 public class TransactionsRegistration {
@@ -29,18 +30,24 @@ public class TransactionsRegistration {
                 return;
             }
 
-            TransactionsInput inputHelper = new TransactionsInput(SCANNER, existingStocks);
+            List<TransactionsData> history = TransactionsCsvReader.showTransactionsList(STOCKS_FILE_PATH, TRANSACTIONS_FILE_PATH);
+            if(history == null || history.isEmpty()){
+                System.out.println("エラー：取引データが空か、読み込めませんでした。先に銘柄を登録してください。");
+                return;
+            }
+
+            TransactionsInput inputHelper = new TransactionsInput(SCANNER, existingStocks, history);
             String ticker = inputHelper.askTicker();
-            LocalDateTime tradedDateTime = inputHelper.askTradedDateTime();
+            LocalDateTime tradedDateTime = inputHelper.askTradedDateTime(ticker);
             Side side = inputHelper.askSide();
-            Long quantity = inputHelper.askQuantity();
+            Long quantity = inputHelper.askQuantity(ticker, side);
             BigDecimal tradedUnitPrice = inputHelper.askTradedUnitPrice();
             LocalDateTime inputDateTime = LocalDateTime.now();
 
             TransactionsData transactions = new TransactionsData(tradedDateTime, ticker, side, quantity, tradedUnitPrice, inputDateTime);
 
-            TransactionsCsvWritter writter = new TransactionsCsvWritter();
-            writter.append(TRANSACTIONS_FILE_PATH, transactions);
+            TransactionsCsvWriter writer = new TransactionsCsvWriter();
+            writer.append(TRANSACTIONS_FILE_PATH, transactions);
             System.out.println("受け付けました。");
 
         }catch(IOException e){

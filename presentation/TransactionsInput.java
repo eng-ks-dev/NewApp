@@ -7,16 +7,19 @@ import java.util.Scanner;
 
 import business.Side;
 import business.StocksData;
+import business.TransactionsData;
 import business.TransactionsValidator;
 
 public class TransactionsInput {
     private final Scanner SCANNER;
     private final List<StocksData> STOCKS;
+    private final List<TransactionsData> HISTORY;
     
 
-    public TransactionsInput(Scanner scanner, List<StocksData> stocks){
+    public TransactionsInput(Scanner scanner, List<StocksData> stocks, List<TransactionsData> history){
         this.SCANNER = scanner;
         this.STOCKS = stocks;
+        this.HISTORY = history;
     }
 
     public String askTicker(){
@@ -29,12 +32,12 @@ public class TransactionsInput {
         }
     }
 
-    public LocalDateTime askTradedDateTime(){
+    public LocalDateTime askTradedDateTime(String ticker){
         while(true){
             System.out.print("取引日時(Ex: 2025-09-04 10:30)> ");
             String tradedDateTimeStr = SCANNER.nextLine().trim();
             LocalDateTime tradedDateTime = TransactionsValidator.checkTradedDateTime(tradedDateTimeStr);
-            if(tradedDateTime != null){
+            if(tradedDateTime != null && TransactionsValidator.checkDateTimeOrder(ticker, tradedDateTime, HISTORY)){
                 return tradedDateTime;
             }
         }
@@ -50,12 +53,12 @@ public class TransactionsInput {
         }
     }
 
-    public Long askQuantity(){
+    public Long askQuantity(String ticker,Side side){
         while(true){
             System.out.print("取引数量(100株単位)> ");
             String quantityStr = SCANNER.nextLine().trim();
             Long quantity = TransactionsValidator.checkQuantity(quantityStr);
-            if(quantity != null){
+            if(quantity != null && TransactionsValidator.checkAvailableQuantity(ticker, side, quantity, HISTORY)){
                 return quantity;
             }
         }

@@ -117,5 +117,50 @@ public class TransactionsValidator {
             return null;
         }
     }
+
+    public static boolean checkAvailableQuantity(String ticker, Side side, long inputQuantity, List<TransactionsData> history){
+        if(side == Side.BUY){
+            return true;
+        }
+
+        long currentQuantity = 0;
+        for(TransactionsData transaction : history){
+            if(transaction.getTicker().equals(ticker)){
+                if(transaction.getSide() == Side.BUY){
+                    currentQuantity += transaction.getQuantity();
+                }else{
+                    currentQuantity -= transaction.getQuantity();
+                }
+            }
+        }
+
+        if(currentQuantity < inputQuantity){
+            System.out.println("保有数量を超えた取引は行えません。\n現在の保有数量は、" + currentQuantity + "です。");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static boolean checkDateTimeOrder(String ticker, LocalDateTime inputDataTime, List<TransactionsData> history){
+        LocalDateTime latestDateTime = null;
+
+        for(TransactionsData transaction : history){
+            if(transaction.getTicker().equals(ticker)){
+                if(latestDateTime == null || transaction.getTradedDateTime().isAfter(latestDateTime)){
+                    latestDateTime = transaction.getTradedDateTime();
+                }
+            }
+        }
+
+        if(latestDateTime != null && !inputDataTime.isAfter(latestDateTime)){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String formattedLatestDateTime = latestDateTime.format(formatter);
+            System.out.println("最新の取引日時（" + formattedLatestDateTime +"）より後の日時を入力してください。");
+            return false;
+        }
+
+        return true;
+    }
     
 }
