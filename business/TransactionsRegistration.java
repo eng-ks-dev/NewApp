@@ -31,8 +31,8 @@ public class TransactionsRegistration {
             }
 
             List<TransactionsData> history = TransactionsCsvReader.showTransactionsList(STOCKS_FILE_PATH, TRANSACTIONS_FILE_PATH);
-            if(history == null || history.isEmpty()){
-                System.out.println("エラー：取引データが空か、読み込めませんでした。先に銘柄を登録してください。");
+            if(history == null){
+                System.out.println("エラー：取引データを読み込めませんでした。");
                 return;
             }
 
