@@ -63,6 +63,7 @@ public class ManagerApp{
                 case "E":
                     System.out.println("保有ポジション一覧を表示します。");
                     List<TransactionsData> transactionsE = TransactionsCsvReader.showTransactionsList(STOCKS_FILE_PATH, TRANSACTIONS_FILE_PATH);
+                    List<StocksData> stocksE = StocksCsvReader.showStocksList(STOCKS_FILE_PATH);
                     if(transactionsE != null){
                         if(transactionsE.isEmpty()){
 
@@ -71,7 +72,7 @@ public class ManagerApp{
                             PositionsCalculator calculator = new PositionsCalculator();
                             List<PositionsData> positions = calculator.calculatePositions(transactionsE);
 
-                            PositionsTablePrinter.printPositionsTable(positions);
+                            PositionsTablePrinter.printPositionsTable(positions, stocksE);
                         }
                     }
 

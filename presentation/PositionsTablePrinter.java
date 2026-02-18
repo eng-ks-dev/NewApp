@@ -1,37 +1,47 @@
 package presentation;
 
 import business.PositionsData;
+import business.StocksData;
 
 import java.util.List;
 
 public class PositionsTablePrinter {
-    public static void printPositionsTable(List<PositionsData> positions){
+    public static void printPositionsTable(List<PositionsData> positions, List<StocksData> stocks){
         final int[] WIDTHS = {8, 32, 17};
         final String[] REGULATION_HEADER = {"Ticker", "Product_Name", "Quantity"};
 
         PositionsTablePrinter printer = new PositionsTablePrinter();
-        printer.print(positions, WIDTHS, REGULATION_HEADER);
+        printer.print(positions, WIDTHS, REGULATION_HEADER, stocks);
     }
 
-    public void print(List<PositionsData> positions, int[] widths, String[] header){
+    public void print(List<PositionsData> positions, int[] widths, String[] header, List<StocksData> stocks){
         printTopBottomBorder(widths);
         printHeader(widths, header);
         printMiddleBorder(widths);
-        printData(positions, widths);
+        printData(positions, widths, stocks);
         printTopBottomBorder(widths);
     }
 
-    private void printData(List<PositionsData> positions, int[] widths){
+    private void printData(List<PositionsData> positions, int[] widths, List<StocksData> stocks){
         for(PositionsData position : positions) {
             System.out.print("|");
             System.out.print(leftAlign(position.getTicker(), widths[0]));
             System.out.print("|");
-            System.out.print(leftAlign(position.getProductName(), widths[1]));
+            System.out.print(leftAlign(getProductName(position.getTicker(), stocks), widths[1]));
             System.out.print("|");
             String quantity = String.format("%,d", position.getQuantity());
             System.out.print(rightAlign(quantity, widths[2]));
             System.out.println("|");
         }
+    }
+
+    public String getProductName(String ticker, List<StocksData> stocks){
+        for(StocksData stock : stocks){
+            if(stock.getTicker().equals(ticker)){
+                return stock.getProductName();
+            }
+        }
+        return null;
     }
 
     private void printTopBottomBorder(int[] widths){
